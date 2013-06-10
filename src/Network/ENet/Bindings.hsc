@@ -1,16 +1,16 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 #include <bindings.dsl.h>
 #include "enet/include/enet/enet.h"
-module Network.Enet.Bindings.Enet where
+module Network.ENet.Bindings where
 import Foreign.Ptr
 #strict_import
 
-import Network.Enet.Bindings.Enet/win32
-import Network.Enet.Bindings.Enet/unix
-import Network.Enet.Bindings.Enet/types
-import Network.Enet.Bindings.Enet/protocol
-import Network.Enet.Bindings.Enet/list
-import Network.Enet.Bindings.Enet/callbacks
+import Network.ENet.Bindings/win32
+import Network.ENet.Bindings/unix
+import Network.ENet.Bindings/types
+import Network.ENet.Bindings/protocol
+import Network.ENet.Bindings/list
+import Network.ENet.Bindings/callbacks
 {- typedef enet_uint32 ENetVersion; -}
 #synonym_t ENetVersion , CUInt
 {- struct _ENetHost; -}
