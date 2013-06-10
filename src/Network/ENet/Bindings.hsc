@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 #include <bindings.dsl.h>
-#include "enet/include/enet/enet.h"
+#include "enet/enet.h"
 module Network.ENet.Bindings where
 import Foreign.Ptr
 #strict_import
