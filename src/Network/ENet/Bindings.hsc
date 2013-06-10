@@ -12,7 +12,7 @@ import Network.ENet.Bindings/protocol
 import Network.ENet.Bindings/list
 import Network.ENet.Bindings/callbacks
 {- typedef enet_uint32 ENetVersion; -}
-#synonym_t ENetVersion , CUInt
+#synonym_t ENetVersion , Word32
 {- struct _ENetHost; -}
 #opaque_t _ENetHost
 {- struct _ENetEvent; -}
@@ -79,8 +79,8 @@ import Network.ENet.Bindings/callbacks
             enet_uint32 host; enet_uint16 port;
         } ENetAddress; -}
 #starttype _ENetAddress
-#field host , CUInt
-#field port , CUShort
+#field host , Word32
+#field port , Word16
 #stoptype
 #synonym_t ENetAddress , <_ENetAddress>
 {- typedef enum _ENetPacketFlag {
@@ -108,8 +108,8 @@ import Network.ENet.Bindings/callbacks
         } ENetPacket; -}
 #starttype _ENetPacket
 #field referenceCount , CSize
-#field flags , CUInt
-#field data , Ptr CUChar
+#field flags , Word32
+#field data , Ptr Word8
 #field dataLength , CSize
 #field freeCallback , <ENetPacketFreeCallback>
 #field userData , Ptr ()
@@ -122,7 +122,7 @@ import Network.ENet.Bindings/callbacks
         } ENetAcknowledgement; -}
 #starttype _ENetAcknowledgement
 #field acknowledgementList , <_ENetListNode>
-#field sentTime , CUInt
+#field sentTime , Word32
 #field command , <_ENetProtocol>
 #stoptype
 #synonym_t ENetAcknowledgement , <_ENetAcknowledgement>
@@ -141,14 +141,14 @@ import Network.ENet.Bindings/callbacks
         } ENetOutgoingCommand; -}
 #starttype _ENetOutgoingCommand
 #field outgoingCommandList , <_ENetListNode>
-#field reliableSequenceNumber , CUShort
-#field unreliableSequenceNumber , CUShort
-#field sentTime , CUInt
-#field roundTripTimeout , CUInt
-#field roundTripTimeoutLimit , CUInt
-#field fragmentOffset , CUInt
-#field fragmentLength , CUShort
-#field sendAttempts , CUShort
+#field reliableSequenceNumber , Word16
+#field unreliableSequenceNumber , Word16
+#field sentTime , Word32
+#field roundTripTimeout , Word32
+#field roundTripTimeoutLimit , Word32
+#field fragmentOffset , Word32
+#field fragmentLength , Word16
+#field sendAttempts , Word16
 #field command , <_ENetProtocol>
 #field packet , Ptr <_ENetPacket>
 #stoptype
@@ -165,12 +165,12 @@ import Network.ENet.Bindings/callbacks
         } ENetIncomingCommand; -}
 #starttype _ENetIncomingCommand
 #field incomingCommandList , <_ENetListNode>
-#field reliableSequenceNumber , CUShort
-#field unreliableSequenceNumber , CUShort
+#field reliableSequenceNumber , Word16
+#field unreliableSequenceNumber , Word16
 #field command , <_ENetProtocol>
-#field fragmentCount , CUInt
-#field fragmentsRemaining , CUInt
-#field fragments , Ptr CUInt
+#field fragmentCount , Word32
+#field fragmentsRemaining , Word32
+#field fragments , Ptr Word32
 #field packet , Ptr <_ENetPacket>
 #stoptype
 #synonym_t ENetIncomingCommand , <_ENetIncomingCommand>
@@ -260,12 +260,12 @@ import Network.ENet.Bindings/callbacks
             ENetList incomingUnreliableCommands;
         } ENetChannel; -}
 #starttype _ENetChannel
-#field outgoingReliableSequenceNumber , CUShort
-#field outgoingUnreliableSequenceNumber , CUShort
-#field usedReliableWindows , CUShort
-#array_field reliableWindows , CUShort
-#field incomingReliableSequenceNumber , CUShort
-#field incomingUnreliableSequenceNumber , CUShort
+#field outgoingReliableSequenceNumber , Word16
+#field outgoingUnreliableSequenceNumber , Word16
+#field usedReliableWindows , Word16
+#array_field reliableWindows , Word16
+#field incomingReliableSequenceNumber , Word16
+#field incomingUnreliableSequenceNumber , Word16
 #field incomingReliableCommands , <_ENetList>
 #field incomingUnreliableCommands , <_ENetList>
 #stoptype
@@ -334,52 +334,52 @@ import Network.ENet.Bindings/callbacks
 #starttype _ENetPeer
 #field dispatchList , <_ENetListNode>
 #field host , Ptr <_ENetHost>
-#field outgoingPeerID , CUShort
-#field incomingPeerID , CUShort
-#field connectID , CUInt
-#field outgoingSessionID , CUChar
-#field incomingSessionID , CUChar
+#field outgoingPeerID , Word16
+#field incomingPeerID , Word16
+#field connectID , Word32
+#field outgoingSessionID , Word8
+#field incomingSessionID , Word8
 #field address , <_ENetAddress>
 #field data , Ptr ()
 #field state , <_ENetPeerState>
 #field channels , Ptr <_ENetChannel>
 #field channelCount , CSize
-#field incomingBandwidth , CUInt
-#field outgoingBandwidth , CUInt
-#field incomingBandwidthThrottleEpoch , CUInt
-#field outgoingBandwidthThrottleEpoch , CUInt
-#field incomingDataTotal , CUInt
-#field outgoingDataTotal , CUInt
-#field lastSendTime , CUInt
-#field lastReceiveTime , CUInt
-#field nextTimeout , CUInt
-#field earliestTimeout , CUInt
-#field packetLossEpoch , CUInt
-#field packetsSent , CUInt
-#field packetsLost , CUInt
-#field packetLoss , CUInt
-#field packetLossVariance , CUInt
-#field packetThrottle , CUInt
-#field packetThrottleLimit , CUInt
-#field packetThrottleCounter , CUInt
-#field packetThrottleEpoch , CUInt
-#field packetThrottleAcceleration , CUInt
-#field packetThrottleDeceleration , CUInt
-#field packetThrottleInterval , CUInt
-#field pingInterval , CUInt
-#field timeoutLimit , CUInt
-#field timeoutMinimum , CUInt
-#field timeoutMaximum , CUInt
-#field lastRoundTripTime , CUInt
-#field lowestRoundTripTime , CUInt
-#field lastRoundTripTimeVariance , CUInt
-#field highestRoundTripTimeVariance , CUInt
-#field roundTripTime , CUInt
-#field roundTripTimeVariance , CUInt
-#field mtu , CUInt
-#field windowSize , CUInt
-#field reliableDataInTransit , CUInt
-#field outgoingReliableSequenceNumber , CUShort
+#field incomingBandwidth , Word32
+#field outgoingBandwidth , Word32
+#field incomingBandwidthThrottleEpoch , Word32
+#field outgoingBandwidthThrottleEpoch , Word32
+#field incomingDataTotal , Word32
+#field outgoingDataTotal , Word32
+#field lastSendTime , Word32
+#field lastReceiveTime , Word32
+#field nextTimeout , Word32
+#field earliestTimeout , Word32
+#field packetLossEpoch , Word32
+#field packetsSent , Word32
+#field packetsLost , Word32
+#field packetLoss , Word32
+#field packetLossVariance , Word32
+#field packetThrottle , Word32
+#field packetThrottleLimit , Word32
+#field packetThrottleCounter , Word32
+#field packetThrottleEpoch , Word32
+#field packetThrottleAcceleration , Word32
+#field packetThrottleDeceleration , Word32
+#field packetThrottleInterval , Word32
+#field pingInterval , Word32
+#field timeoutLimit , Word32
+#field timeoutMinimum , Word32
+#field timeoutMaximum , Word32
+#field lastRoundTripTime , Word32
+#field lowestRoundTripTime , Word32
+#field lastRoundTripTimeVariance , Word32
+#field highestRoundTripTimeVariance , Word32
+#field roundTripTime , Word32
+#field roundTripTimeVariance , Word32
+#field mtu , Word32
+#field windowSize , Word32
+#field reliableDataInTransit , Word32
+#field outgoingReliableSequenceNumber , Word16
 #field acknowledgements , <_ENetList>
 #field sentReliableCommands , <_ENetList>
 #field sentUnreliableCommands , <_ENetList>
@@ -387,10 +387,10 @@ import Network.ENet.Bindings/callbacks
 #field outgoingUnreliableCommands , <_ENetList>
 #field dispatchedCommands , <_ENetList>
 #field needsDispatch , CInt
-#field incomingUnsequencedGroup , CUShort
-#field outgoingUnsequencedGroup , CUShort
-#array_field unsequencedWindow , CUInt
-#field eventData , CUInt
+#field incomingUnsequencedGroup , Word16
+#field outgoingUnsequencedGroup , Word16
+#array_field unsequencedWindow , Word32
+#field eventData , Word32
 #stoptype
 #synonym_t ENetPeer , <_ENetPeer>
 {- typedef struct _ENetCompressor {
@@ -410,14 +410,14 @@ import Network.ENet.Bindings/callbacks
         } ENetCompressor; -}
 #starttype _ENetCompressor
 #field context , Ptr ()
-#field compress , FunPtr (Ptr () -> Ptr <ENetBuffer> -> CSize -> CSize -> Ptr CUChar -> CSize -> CSize)
-#field decompress , FunPtr (Ptr () -> Ptr CUChar -> CSize -> Ptr CUChar -> CSize -> CSize)
+#field compress , FunPtr (Ptr () -> Ptr <ENetBuffer> -> CSize -> CSize -> Ptr Word8 -> CSize -> CSize)
+#field decompress , FunPtr (Ptr () -> Ptr Word8 -> CSize -> Ptr Word8 -> CSize -> CSize)
 #field destroy , FunPtr (Ptr () -> IO ())
 #stoptype
 #synonym_t ENetCompressor , <_ENetCompressor>
 {- typedef enet_uint32 (* ENetChecksumCallback)(const ENetBuffer * buffers,
                                              size_t bufferCount); -}
-#synonym_t ENetChecksumCallback , CUInt
+#synonym_t ENetChecksumCallback , Word32
 {- typedef int (* ENetInterceptCallback)(struct _ENetHost * host,
                                       struct _ENetEvent * event); -}
 #synonym_t ENetInterceptCallback , CInt
@@ -459,34 +459,34 @@ import Network.ENet.Bindings/callbacks
 #starttype _ENetHost
 #field socket , CInt
 #field address , <_ENetAddress>
-#field incomingBandwidth , CUInt
-#field outgoingBandwidth , CUInt
-#field bandwidthThrottleEpoch , CUInt
-#field mtu , CUInt
-#field randomSeed , CUInt
+#field incomingBandwidth , Word32
+#field outgoingBandwidth , Word32
+#field bandwidthThrottleEpoch , Word32
+#field mtu , Word32
+#field randomSeed , Word32
 #field recalculateBandwidthLimits , CInt
 #field peers , Ptr <_ENetPeer>
 #field peerCount , CSize
 #field channelLimit , CSize
-#field serviceTime , CUInt
+#field serviceTime , Word32
 #field dispatchQueue , <_ENetList>
 #field continueSending , CInt
 #field packetSize , CSize
-#field headerFlags , CUShort
+#field headerFlags , Word16
 #array_field commands , <_ENetProtocol>
 #field commandCount , CSize
 #array_field buffers , <ENetBuffer>
 #field bufferCount , CSize
-#field checksum , CUInt
+#field checksum , Word32
 #field compressor , <_ENetCompressor>
-#array_field packetData , Ptr (CUChar)
+#array_field packetData , Ptr (Word8)
 #field receivedAddress , <_ENetAddress>
-#field receivedData , Ptr CUChar
+#field receivedData , Ptr Word8
 #field receivedDataLength , CSize
-#field totalSentData , CUInt
-#field totalSentPackets , CUInt
-#field totalReceivedData , CUInt
-#field totalReceivedPackets , CUInt
+#field totalSentData , Word32
+#field totalSentPackets , Word32
+#field totalReceivedData , Word32
+#field totalReceivedPackets , Word32
 #field intercept , CInt
 #field connectedPeers , CSize
 #field bandwidthLimitedPeers , CSize
@@ -514,17 +514,17 @@ import Network.ENet.Bindings/callbacks
 #starttype _ENetEvent
 #field type , <_ENetEventType>
 #field peer , Ptr <_ENetPeer>
-#field channelID , CUChar
-#field data , CUInt
+#field channelID , Word8
+#field data , Word32
 #field packet , Ptr <_ENetPacket>
 #stoptype
 #synonym_t ENetEvent , <_ENetEvent>
 #ccall enet_initialize , IO (CInt)
-#ccall enet_initialize_with_callbacks , CUInt -> Ptr <_ENetCallbacks> -> IO (CInt)
+#ccall enet_initialize_with_callbacks , Word32 -> Ptr <_ENetCallbacks> -> IO (CInt)
 #ccall enet_deinitialize , IO ()
-#ccall enet_linked_version , IO (CUInt)
-#ccall enet_time_get , IO (CUInt)
-#ccall enet_time_set , CUInt -> IO ()
+#ccall enet_linked_version , IO (Word32)
+#ccall enet_time_get , IO (Word32)
+#ccall enet_time_set , Word32 -> IO ()
 #ccall enet_socket_create , <_ENetSocketType> -> IO (CInt)
 #ccall enet_socket_bind , CInt -> Ptr <_ENetAddress> -> IO (CInt)
 #ccall enet_socket_get_address , CInt -> Ptr <_ENetAddress> -> IO (CInt)
@@ -533,52 +533,52 @@ import Network.ENet.Bindings/callbacks
 #ccall enet_socket_connect , CInt -> Ptr <_ENetAddress> -> IO (CInt)
 #ccall enet_socket_send , CInt -> Ptr <_ENetAddress> -> Ptr <ENetBuffer> -> CSize -> IO (CInt)
 #ccall enet_socket_receive , CInt -> Ptr <_ENetAddress> -> Ptr <ENetBuffer> -> CSize -> IO (CInt)
-#ccall enet_socket_wait , CInt -> Ptr CUInt -> CUInt -> IO (CInt)
+#ccall enet_socket_wait , CInt -> Ptr Word32 -> Word32 -> IO (CInt)
 #ccall enet_socket_set_option , CInt -> <_ENetSocketOption> -> CInt -> IO (CInt)
 #ccall enet_socket_shutdown , CInt -> <_ENetSocketShutdown> -> IO (CInt)
 #ccall enet_socket_destroy , CInt -> IO ()
-#ccall enet_socketset_select , CInt -> Ptr <fd_set> -> Ptr <fd_set> -> CUInt -> IO (CInt)
+#ccall enet_socketset_select , CInt -> Ptr <fd_set> -> Ptr <fd_set> -> Word32 -> IO (CInt)
 #ccall enet_address_set_host , Ptr <_ENetAddress> -> CString -> IO (CInt)
 #ccall enet_address_get_host_ip , Ptr <_ENetAddress> -> CString -> CSize -> IO (CInt)
 #ccall enet_address_get_host , Ptr <_ENetAddress> -> CString -> CSize -> IO (CInt)
-#ccall enet_packet_create , Ptr () -> CSize -> CUInt -> IO (Ptr <_ENetPacket>)
+#ccall enet_packet_create , Ptr () -> CSize -> Word32 -> IO (Ptr <_ENetPacket>)
 #ccall enet_packet_destroy , Ptr <_ENetPacket> -> IO ()
 #ccall enet_packet_resize , Ptr <_ENetPacket> -> CSize -> IO (CInt)
-#ccall enet_crc32 , Ptr <ENetBuffer> -> CSize -> IO (CUInt)
-#ccall enet_host_create , Ptr <_ENetAddress> -> CSize -> CSize -> CUInt -> CUInt -> IO (Ptr <_ENetHost>)
+#ccall enet_crc32 , Ptr <ENetBuffer> -> CSize -> IO (Word32)
+#ccall enet_host_create , Ptr <_ENetAddress> -> CSize -> CSize -> Word32 -> Word32 -> IO (Ptr <_ENetHost>)
 #ccall enet_host_destroy , Ptr <_ENetHost> -> IO ()
-#ccall enet_host_connect , Ptr <_ENetHost> -> Ptr <_ENetAddress> -> CSize -> CUInt -> IO (Ptr <_ENetPeer>)
+#ccall enet_host_connect , Ptr <_ENetHost> -> Ptr <_ENetAddress> -> CSize -> Word32 -> IO (Ptr <_ENetPeer>)
 #ccall enet_host_check_events , Ptr <_ENetHost> -> Ptr <_ENetEvent> -> IO (CInt)
-#ccall enet_host_service , Ptr <_ENetHost> -> Ptr <_ENetEvent> -> CUInt -> IO (CInt)
+#ccall enet_host_service , Ptr <_ENetHost> -> Ptr <_ENetEvent> -> Word32 -> IO (CInt)
 #ccall enet_host_flush , Ptr <_ENetHost> -> IO ()
-#ccall enet_host_broadcast , Ptr <_ENetHost> -> CUChar -> Ptr <_ENetPacket> -> IO ()
+#ccall enet_host_broadcast , Ptr <_ENetHost> -> Word8 -> Ptr <_ENetPacket> -> IO ()
 #ccall enet_host_compress , Ptr <_ENetHost> -> Ptr <_ENetCompressor> -> IO ()
 #ccall enet_host_compress_with_range_coder , Ptr <_ENetHost> -> IO (CInt)
 #ccall enet_host_channel_limit , Ptr <_ENetHost> -> CSize -> IO ()
-#ccall enet_host_bandwidth_limit , Ptr <_ENetHost> -> CUInt -> CUInt -> IO ()
+#ccall enet_host_bandwidth_limit , Ptr <_ENetHost> -> Word32 -> Word32 -> IO ()
 #ccall enet_host_bandwidth_throttle , Ptr <_ENetHost> -> IO ()
-#ccall enet_peer_send , Ptr <_ENetPeer> -> CUChar -> Ptr <_ENetPacket> -> IO (CInt)
-#ccall enet_peer_receive , Ptr <_ENetPeer> -> Ptr CUChar -> IO (Ptr <_ENetPacket>)
+#ccall enet_peer_send , Ptr <_ENetPeer> -> Word8 -> Ptr <_ENetPacket> -> IO (CInt)
+#ccall enet_peer_receive , Ptr <_ENetPeer> -> Ptr Word8 -> IO (Ptr <_ENetPacket>)
 #ccall enet_peer_ping , Ptr <_ENetPeer> -> IO ()
-#ccall enet_peer_ping_interval , Ptr <_ENetPeer> -> CUInt -> IO ()
-#ccall enet_peer_timeout , Ptr <_ENetPeer> -> CUInt -> CUInt -> CUInt -> IO ()
+#ccall enet_peer_ping_interval , Ptr <_ENetPeer> -> Word32 -> IO ()
+#ccall enet_peer_timeout , Ptr <_ENetPeer> -> Word32 -> Word32 -> Word32 -> IO ()
 #ccall enet_peer_reset , Ptr <_ENetPeer> -> IO ()
-#ccall enet_peer_disconnect , Ptr <_ENetPeer> -> CUInt -> IO ()
-#ccall enet_peer_disconnect_now , Ptr <_ENetPeer> -> CUInt -> IO ()
-#ccall enet_peer_disconnect_later , Ptr <_ENetPeer> -> CUInt -> IO ()
-#ccall enet_peer_throttle_configure , Ptr <_ENetPeer> -> CUInt -> CUInt -> CUInt -> IO ()
-#ccall enet_peer_throttle , Ptr <_ENetPeer> -> CUInt -> IO (CInt)
+#ccall enet_peer_disconnect , Ptr <_ENetPeer> -> Word32 -> IO ()
+#ccall enet_peer_disconnect_now , Ptr <_ENetPeer> -> Word32 -> IO ()
+#ccall enet_peer_disconnect_later , Ptr <_ENetPeer> -> Word32 -> IO ()
+#ccall enet_peer_throttle_configure , Ptr <_ENetPeer> -> Word32 -> Word32 -> Word32 -> IO ()
+#ccall enet_peer_throttle , Ptr <_ENetPeer> -> Word32 -> IO (CInt)
 #ccall enet_peer_reset_queues , Ptr <_ENetPeer> -> IO ()
 #ccall enet_peer_setup_outgoing_command , Ptr <_ENetPeer> -> Ptr <_ENetOutgoingCommand> -> IO ()
-#ccall enet_peer_queue_outgoing_command , Ptr <_ENetPeer> -> Ptr <_ENetProtocol> -> Ptr <_ENetPacket> -> CUInt -> CUShort -> IO (Ptr <_ENetOutgoingCommand>)
-#ccall enet_peer_queue_incoming_command , Ptr <_ENetPeer> -> Ptr <_ENetProtocol> -> Ptr <_ENetPacket> -> CUInt -> IO (Ptr <_ENetIncomingCommand>)
-#ccall enet_peer_queue_acknowledgement , Ptr <_ENetPeer> -> Ptr <_ENetProtocol> -> CUShort -> IO (Ptr <_ENetAcknowledgement>)
+#ccall enet_peer_queue_outgoing_command , Ptr <_ENetPeer> -> Ptr <_ENetProtocol> -> Ptr <_ENetPacket> -> Word32 -> Word16 -> IO (Ptr <_ENetOutgoingCommand>)
+#ccall enet_peer_queue_incoming_command , Ptr <_ENetPeer> -> Ptr <_ENetProtocol> -> Ptr <_ENetPacket> -> Word32 -> IO (Ptr <_ENetIncomingCommand>)
+#ccall enet_peer_queue_acknowledgement , Ptr <_ENetPeer> -> Ptr <_ENetProtocol> -> Word16 -> IO (Ptr <_ENetAcknowledgement>)
 #ccall enet_peer_dispatch_incoming_unreliable_commands , Ptr <_ENetPeer> -> Ptr <_ENetChannel> -> IO ()
 #ccall enet_peer_dispatch_incoming_reliable_commands , Ptr <_ENetPeer> -> Ptr <_ENetChannel> -> IO ()
 #ccall enet_peer_on_connect , Ptr <_ENetPeer> -> IO ()
 #ccall enet_peer_on_disconnect , Ptr <_ENetPeer> -> IO ()
 #ccall enet_range_coder_create , IO (Ptr ())
 #ccall enet_range_coder_destroy , Ptr () -> IO ()
-#ccall enet_range_coder_compress , Ptr () -> Ptr <ENetBuffer> -> CSize -> CSize -> Ptr CUChar -> CSize -> IO (CSize)
-#ccall enet_range_coder_decompress , Ptr () -> Ptr CUChar -> CSize -> Ptr CUChar -> CSize -> IO (CSize)
-#ccall enet_protocol_command_size , CUChar -> IO (CSize)
+#ccall enet_range_coder_compress , Ptr () -> Ptr <ENetBuffer> -> CSize -> CSize -> Ptr Word8 -> CSize -> IO (CSize)
+#ccall enet_range_coder_decompress , Ptr () -> Ptr Word8 -> CSize -> Ptr Word8 -> CSize -> IO (CSize)
+#ccall enet_protocol_command_size , Word8 -> IO (CSize)
