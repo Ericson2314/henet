@@ -5,12 +5,12 @@ module Network.ENet.Bindings where
 import Foreign.Ptr
 #strict_import
 
-import Network.ENet.Bindings/win32
-import Network.ENet.Bindings/unix
-import Network.ENet.Bindings/types
-import Network.ENet.Bindings/protocol
-import Network.ENet.Bindings/list
-import Network.ENet.Bindings/callbacks
+import Network.ENet.Bindings.Win32
+import Network.ENet.Bindings.Unix
+import Network.ENet.Bindings.Types
+import Network.ENet.Bindings.Protocol
+import Network.ENet.Bindings.List
+import Network.ENet.Bindings.Callbacks
 {- typedef enet_uint32 ENetVersion; -}
 #synonym_t ENetVersion , CUInt
 {- struct _ENetHost; -}

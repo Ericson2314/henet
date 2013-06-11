@@ -5,7 +5,7 @@ module Network.ENet.Bindings.Protocol where
 import Foreign.Ptr
 #strict_import
 
-import Network.ENet.Bindings.Enet/types
+import Network.ENet.Bindings.Types
 {- enum {
     ENET_PROTOCOL_MINIMUM_MTU = 576,
     ENET_PROTOCOL_MAXIMUM_MTU = 4096,
