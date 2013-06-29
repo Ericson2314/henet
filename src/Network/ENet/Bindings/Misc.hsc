@@ -5,6 +5,8 @@ import Foreign
 import Foreign.Storable
 import Foreign.C.Types
 
+import Data.BitSet.Generic(GBitSet)
+
 import Network.ENet.Bindings.System
 --import Network.ENet.Bindings.Protocol
 import Network.ENet.Bindings.List
@@ -48,6 +50,8 @@ data SocketOption = NonBlock
                   | ReceiveTimeIs0
                   | SendTimeIs0
                   deriving (Show, Eq)
+
+type SocketOptionSet = GBitSet CUInt SocketOption
 
 instance Enum SocketOption where
   fromEnum NonBlock       = 1

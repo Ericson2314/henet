@@ -35,6 +35,7 @@ Library
 
 
   build-depends:      base          >= 3
+    ,                 bitset        >= 1.4.0
 
 		   -- Low-Level Interface
   exposed-modules:    Network.ENet.Bindings
@@ -53,6 +54,7 @@ Library
     ,                 Network.ENet.Bindings.List
     ,                 Network.ENet.Bindings.Misc
                        -- ^ Other types
+    ,                 Foreign.BitSet
 
   c-sources:          enet/callbacks.c
     ,                 enet/compress.c
