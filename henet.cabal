@@ -44,6 +44,7 @@ Library
     ,                 Network.ENet.Bindings.Address
     ,                 Network.ENet.Bindings.Packet
     ,                 Network.ENet.Bindings.Peer
+    ,                 Network.ENet.Bindings.RangeCoder
 --                   -- High-Leel Interface
 --    ,                 Network.ENet.Host
 --    ,                 Network.ENet.Peer

@@ -165,3 +165,7 @@ instance Storable Event where
        (#poke ENetEvent, channelID) ptr c
        (#poke ENetEvent, data)      ptr d
        (#poke ENetEvent, packet)    ptr pa
+
+------
+
+data RangeCoder
