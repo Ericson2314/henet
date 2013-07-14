@@ -37,14 +37,7 @@ Library
   build-depends:      base          >= 3
     ,                 bitset        >= 1.4.0
 
-		   -- Low-Level Interface
   exposed-modules:    Network.ENet.Bindings
-		       -- ^ global functions
-    ,                 Network.ENet.Bindings.Socket
-    ,                 Network.ENet.Bindings.Address
-    ,                 Network.ENet.Bindings.Packet
-    ,                 Network.ENet.Bindings.Peer
-    ,                 Network.ENet.Bindings.RangeCoder
 --                   -- High-Leel Interface
 --    ,                 Network.ENet.Host
 --    ,                 Network.ENet.Peer
@@ -53,9 +46,6 @@ Library
     ,                 Network.ENet.Bindings.Callbacks
 --    ,                 Network.ENet.Bindings.Protocol
     ,                 Network.ENet.Bindings.List
-    ,                 Network.ENet.Bindings.Misc
-                       -- ^ Other types
-    ,                 Foreign.BitSet
 
   c-sources:          enet/callbacks.c
     ,                 enet/compress.c
