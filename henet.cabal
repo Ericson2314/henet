@@ -22,7 +22,7 @@ Test-suite henet-test
   ghc-options:        -Wall
   main-is:            Main.hs
   hs-source-dirs:     test
-  build-depends:      base          >= 3
+  build-depends:      base            >= 3
     ,                 henet
 
 Library
@@ -34,15 +34,19 @@ Library
   build-tools:        hsc2hs
 
 
-  build-depends:      base          >= 3
-    ,                 bitset        >= 1.4.0
+  build-depends:      base            >= 3
+    ,                 bitset          >= 1.4.0
+    ,                 network         >= 2.4.1
+    ,                 typesafe-endian == 0.1.*
 
-  exposed-modules:    Network.ENet.Bindings
+  exposed-modules:    Network.ENet
+    ,                 Network.ENet.Bindings
 --                   -- High-Leel Interface
 --    ,                 Network.ENet.Host
 --    ,                 Network.ENet.Peer
 
-  other-modules:      Network.ENet.Bindings.System
+  other-modules:      Network.ENet.Internal
+    ,                 Network.ENet.Bindings.System
     ,                 Network.ENet.Bindings.Callbacks
 --    ,                 Network.ENet.Bindings.Protocol
     ,                 Network.ENet.Bindings.List

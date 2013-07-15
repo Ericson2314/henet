@@ -6,7 +6,9 @@ import Foreign.Storable
 import Foreign.C.Types
 import Foreign.C.String
 
-import Data.BitSet.Generic(GBitSet, toBits, unsafeFromBits)
+import Network.Socket( SockAddr(SockAddrInet)
+                     , HostAddress)
+import Network.Socket.Internal(PortNumber(PortNum))
 
 import Network.ENet.Bindings.System
 --import Network.ENet.Bindings.Protocol
@@ -40,11 +42,6 @@ instance Storable SocketType where
 
 ------
 
-data SocketWait = Send | Recieve | Interrupt
-                deriving (Show, Eq, Enum) -- safe because used in set
-
-------
-
 data SocketOption = NonBlock
                   | Broadcast
                   | ReceiveBuffer
@@ -53,8 +50,6 @@ data SocketOption = NonBlock
                   | ReceiveTimeIs0
                   | SendTimeIs0
                   deriving (Show, Eq)
-
-type SocketOptionSet = GBitSet CUInt SocketOption
 
 instance Enum SocketOption where
   fromEnum NonBlock       = 1
@@ -89,23 +84,7 @@ instance Storable SocketShutdown where
   peek ptr = (toEnum . fromIntegral) `fmap` (peekByteOff ptr 0 :: IO CUInt)
   poke ptr e = pokeByteOff ptr 0 $ (fromIntegral $ fromEnum e :: CUInt)
 
-------
-
-anyHostAddress :: IP -- | specifies the default server host
-anyHostAddress = IPv4 0
-
-broadcastAddress :: IP -- | specifies a subnet-wide broadcast
-broadcastAddress = IPv4 0xFFFFFFFF
-
-anyPort :: Port -- | specifies that a port should be automatically chosen
-anyPort = Port 0
-
-------
-
-newtype IP   = IPv4 Word32 deriving (Show, Eq, Storable)
-newtype Port = Port Word16 deriving (Show, Eq, Storable)
-
-data Address = Address IP Port
+data Address = Address HostAddress Word16
 
 instance Storable Address where
   sizeOf    _ = (#size ENetAddress)
@@ -178,7 +157,7 @@ data RangeCoder
 ------------------------------------------------------------
 
 
- -- Misc functions
+ -- Global functions
 
 foreign import ccall "enet.h enet_initialize"                initialize
   :: IO CInt
@@ -189,19 +168,21 @@ foreign import ccall "enet.h enet_deinitialize"              deinitialize
 foreign import ccall "enet.h enet_linked_version"            linkedVersion
   :: IO Version
 
-foreign import ccall "enet.h enet_time_get" timeGet :: IO Word32
-foreign import ccall "enet.h enet_time_set" timeSet :: Word32 -> IO ()
+foreign import ccall "enet.h enet_time_get"                  timeGet
+  :: IO Word32
+foreign import ccall "enet.h enet_time_set"                  timeSet
+  :: Word32 -> IO ()
 
 
  -- Socket Functions
 
-foreign import ccall "enet.h enet_socket_create"      socketCreate_C
+foreign import ccall "enet.h enet_socket_create"      socketCreate
   :: CUInt -> IO Socket
 foreign import ccall "enet.h enet_socket_bind"        socketBind
   :: Socket -> Ptr Address -> IO CInt
 foreign import ccall "enet.h enet_socket_get_address" socketGetAddress
   :: Socket -> Ptr Address -> IO CInt
-foreign import ccall "enet.h enet_socket_list"        socketListen
+foreign import ccall "enet.h enet_socket_listen"      socketListen
   :: Socket -> CInt -> IO CInt
 foreign import ccall "enet.h enet_socket_accept"      socketAccept
   :: Socket -> Ptr Address -> IO Socket
@@ -213,25 +194,14 @@ foreign import ccall "enet.h enet_socket_receive"     socketReceive
   :: Socket -> Ptr Address -> Ptr Buffer -> CSize -> IO CInt
 foreign import ccall "enet.h enet_socket_wait"        socketWait
   :: Socket -> Ptr Word32 -> Ptr Word32 -> IO CInt
-foreign import ccall "enet.h enet_socket_set_option"  socketSetOption_C
+foreign import ccall "enet.h enet_socket_set_option"  socketSetOption
   :: Socket -> CUInt -> CInt -> IO CInt
-foreign import ccall "enet.h enet_socket_shutdown"    socketShutdown_C
+foreign import ccall "enet.h enet_socket_shutdown"    socketShutdown
   :: Socket -> CUInt -> IO CInt
 foreign import ccall "enet.h enet_socket_destroy"     socketDestroy
   :: Socket -> IO ()
 foreign import ccall "enet.h enet_socketset_select"   socketSelectSet
   :: Socket -> Ptr SocketSet -> Ptr SocketSet -> Word32 -> IO CInt
-
- -- -- more type safe wrappers
-
-socketCreate :: SocketType -> IO Socket
-socketCreate enum = socketCreate_C $ fromIntegral $ fromEnum enum
-
-socketSetOption :: Socket -> SocketOptionSet -> CInt -> IO CInt
-socketSetOption socket bitset = socketSetOption_C socket $ toBits bitset -- point-free
-
-socketShutdown :: Socket -> SocketShutdown -> IO CInt
-socketShutdown socket enum = socketShutdown_C socket $ fromIntegral $ fromEnum enum
 
 
  -- Address Functions
