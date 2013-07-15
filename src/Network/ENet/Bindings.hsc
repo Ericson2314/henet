@@ -136,11 +136,12 @@ instance Storable EventType where
 ------
 
 newtype ChannelID = ChannelID Word8
+                  deriving (Show, Eq, Storable)
 
 data Event = Event
              EventType
              (Ptr Peer)
-             Word8
+             ChannelID
              Word32 -- | event data
              (Ptr Packet                   )
 
@@ -253,7 +254,7 @@ foreign import ccall "enet.h enet_host_service"                   hostService
 foreign import ccall "enet.h enet_host_flush"                     hostFlush
   :: Ptr Host -> IO ()
 foreign import ccall "enet.h enet_host_broadcast"                 hostBroadcast
-  :: Ptr Host -> Word8 -> Ptr Packet -> IO ()
+  :: Ptr Host -> ChannelID -> Ptr Packet -> IO ()
 foreign import ccall "enet.h enet_host_compress"                  hostCompress
   :: Ptr Host -> Ptr Compressor -> IO ()
 foreign import ccall "enet.h enet_host_compress_with_range_coder" hostCompressWithRangeCoder
@@ -267,7 +268,7 @@ foreign import ccall "enet.h enet_host_bandwidth_limit"           hostBandwidthL
  -- Peer Functions
 
 foreign import ccall "enet.h enet_peer_send"               peerSend
-  :: Ptr Peer -> Word8 -> Ptr Packet -> IO CInt
+  :: Ptr Peer -> ChannelID -> Ptr Packet -> IO CInt
 foreign import ccall "enet.h enet_peer_receive"            peerReceive
   :: Ptr Peer -> ChannelID -> IO (Ptr Packet)
 foreign import ccall "enet.h enet_peer_ping"               peerPing

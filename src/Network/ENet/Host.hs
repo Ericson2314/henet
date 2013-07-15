@@ -42,7 +42,7 @@ service host timeout = alloca $ \ptr -> do
 flush :: Ptr B.Host -> IO ()
 flush = B.hostFlush
 
-broadcast :: Ptr B.Host -> Word8 -> Ptr B.Packet -> IO ()
+broadcast :: Ptr B.Host -> B.ChannelID -> Ptr B.Packet -> IO ()
 broadcast = B.hostBroadcast
 
 compress :: Ptr B.Host -> Ptr B.Compressor -> IO ()
