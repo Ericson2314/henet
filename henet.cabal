@@ -38,6 +38,7 @@ Library
     ,                 bitset          >= 1.4.0
     ,                 network         >= 2.4.1
     ,                 bytestring      >= 0.10
+    ,                 primitive       >= 0.2.1
     ,                 typesafe-endian == 0.1.*
 
   exposed-modules:    Network.ENet

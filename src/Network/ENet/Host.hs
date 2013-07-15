@@ -10,10 +10,8 @@ import Network.ENet.Internal
 import qualified Network.ENet.Bindings as B
 
 
-create :: SockAddr -> CSize -> CSize -> Word32 -> Word32 -> IO (Ptr B.Host)
-create address peerCount maxChannels inBandwidth outBandwidth = alloca $ \addr -> do 
-  poke addr $ toENetAddress address
-  B.hostCreate addr peerCount maxChannels inBandwidth outBandwidth
+create :: Maybe SockAddr -> CSize -> CSize -> Word32 -> Word32 -> IO (Ptr B.Host)
+create a c m i o  = withMaybeDo (fmap toENetAddress a) $ \a' -> B.hostCreate a' c m i o
 
 destroy :: Ptr B.Host -> IO ()
 destroy = B.hostDestroy
