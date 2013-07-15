@@ -42,7 +42,7 @@ Library
 
   exposed-modules:    Network.ENet
     ,                 Network.ENet.Host
---    ,                 Network.ENet.Peer
+    ,                 Network.ENet.Peer
     ,                 Network.ENet.Packet
     ,                 Network.ENet.Bindings
 
