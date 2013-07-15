@@ -41,11 +41,10 @@ Library
     ,                 typesafe-endian == 0.1.*
 
   exposed-modules:    Network.ENet
+    ,                 Network.ENet.Host
+--    ,                 Network.ENet.Peer
     ,                 Network.ENet.Packet
     ,                 Network.ENet.Bindings
---                   -- High-Leel Interface
---    ,                 Network.ENet.Host
---    ,                 Network.ENet.Peer
 
   other-modules:      Network.ENet.Internal
     ,                 Network.ENet.Bindings.System
