@@ -97,9 +97,21 @@ instance Storable Address where
 
 ------
 
+data PacketFlag = Reliable
+                | Unsequenced
+                | NoAllocate
+                | UnreliableFragment
+                | PF_Unused_1
+                | PF_Unused_2
+                | PF_Unused_3
+                | PF_Unused_4
+                | IsSent
+                deriving (Show, Eq, Enum) -- safe because used in bitset
+
+------
+
 -- Opaque/Abstract types, cause I am lazy
 
-data PacketFlag
 data Packet
 data Acknowledgement
 data OutgoingCommand
@@ -216,7 +228,7 @@ foreign import ccall "enet.h enet_address_get_host"    addressGetHost
 
  -- Packet Functions
 
-foreign import ccall "enet.h enet_packet_create"   packetSend
+foreign import ccall "enet.h enet_packet_create"   packetCreate
   :: Ptr () -> CSize -> Word32 -> IO (Ptr Packet)
 foreign import ccall "enet.h enet_packet_destroy"  packetDestroy
   :: Ptr Packet -> IO ()

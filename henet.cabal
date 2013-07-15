@@ -37,9 +37,11 @@ Library
   build-depends:      base            >= 3
     ,                 bitset          >= 1.4.0
     ,                 network         >= 2.4.1
+    ,                 bytestring      >= 0.10
     ,                 typesafe-endian == 0.1.*
 
   exposed-modules:    Network.ENet
+    ,                 Network.ENet.Packet
     ,                 Network.ENet.Bindings
 --                   -- High-Leel Interface
 --    ,                 Network.ENet.Host
