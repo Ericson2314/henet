@@ -143,7 +143,7 @@ data Event = Event
              (Ptr Peer)
              ChannelID
              Word32 -- | event data
-             (Ptr Packet                   )
+             (Ptr Packet)
 
 instance Storable Event where
   sizeOf    _ = (#size ENetEvent)
@@ -291,11 +291,11 @@ foreign import ccall "enet.h enet_peer_throttle_configure" peerThrottleConfigure
 
  -- Range Coder Functions
 
-foreign import ccall "enet.h enet_range_coder_create"      rangeCoderCreate
+foreign import ccall "enet.h enet_range_coder_create"     rangeCoderCreate
   :: IO (Ptr  RangeCoder)
-foreign import ccall "enet.h enet_range_coder_destroy"     rangeCoderDestroy
+foreign import ccall "enet.h enet_range_coder_destroy"    rangeCoderDestroy
   :: Ptr RangeCoder -> IO ()
-foreign import ccall "enet.h enet_range_coder_compresss"   rangeCoderCompress
+foreign import ccall "enet.h enet_range_coder_compress"   rangeCoderCompress
   :: Ptr RangeCoder -> Ptr Buffer -> CSize -> CSize -> Word8 -> CSize -> IO CSize
-foreign import ccall "enet.h enet_range_coder_decompresss" rangeCoderDecompresss
+foreign import ccall "enet.h enet_range_coder_decompress" rangeCoderDecompress
   :: Ptr RangeCoder -> Ptr Buffer -> CSize -> Word8 -> CSize -> IO CSize
