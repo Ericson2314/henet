@@ -3,22 +3,22 @@ Version:              1.3.8.0
 Synopsis:             Bindings and high level interface for to ENet v1.3.8
 Description:
   ENet is a networking library on top of UDP. In it's own words:
-
-    ENet's purpose is to provide a relatively thin, simple and robust network
+  .
+    "ENet's purpose is to provide a relatively thin, simple and robust network
     communication layer on top of UDP (User Datagram Protocol). The primary
     feature it provides is optional reliable, in-order delivery of packets.
-
+    .
     ENet omits certain higher level networking features such as authentication,
     lobbying, server discovery, encryption, or other similar tasks that are
     particularly application specific so that the library remains flexible,
-    portable, and easily embeddable.
-
+    portable, and easily embeddable."
+  .
   This library contains both bindings and a slightly cleaned up interface on
   top. The bindings are as close to the original as possible. Names are striped
   of the leading `enet_` and converted to CamelCase, and the occasional newtype
   is used instead, but otherwise all functions signatures are exactly the
   same. The bindings are in `Network.ENet.Bindings`.
-
+  .
   The higher level interface is all other exposed modules. Functions like
   `enet_host_*` are placed in `Network.ENet.Host`. All functions are present
   except for the `enet_socket*` functions: they are just wrappers of the Posix
@@ -28,11 +28,11 @@ Description:
   versions exists), and nullable pointer types have been replaced with
   Maybes. In short, there should be very few reasons to use the raw bindings
   over the "nice" interface.
-
+  .
   At the moment, consult the ENet website for documentation. In the vast
   majority of cases the documentation there should apply here exactly, I will
   try to add Haddock documentation for everywhere it does not.
-
+  .
   ENet currently only supports Ipv4 at the moment (though that should soon
   change), and is only safe to use as when used in one thread. Richer native
   networking libraries leveraging Haskell's strengths exist, and for new
@@ -53,14 +53,14 @@ Source-repository head
   type:               git
   location:           git://github.com/Ericson2314/henet.git
 
-Test-suite henet-test
-  default-language:   Haskell98
-  type:               exitcode-stdio-1.0
-  ghc-options:        -Wall
-  main-is:            Main.hs
-  hs-source-dirs:     test
-  build-depends:      base            >= 3
-    ,                 henet
+--Test-suite henet-test
+--  default-language:   Haskell98
+--  type:               exitcode-stdio-1.0
+--  ghc-options:        -Wall
+--  main-is:            Main.hs
+--  hs-source-dirs:     test
+--  build-depends:      base            >= 3
+--    ,                 henet
 
 Library
   hs-source-dirs:     src
@@ -71,7 +71,7 @@ Library
   build-tools:        hsc2hs
 
 
-  build-depends:      base            >= 3
+  build-depends:      base            >= 3 && < 5
     ,                 bitset          >= 1.4.0
     ,                 network         >= 2.4.1
     ,                 bytestring      >= 0.10
