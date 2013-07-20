@@ -33,7 +33,7 @@ Description:
   majority of cases the documentation there should apply here exactly, I will
   try to add Haddock documentation for everywhere it does not.
   .
-  ENet currently only supports Ipv4 at the moment (though that should soon
+  ENet currently only supports IPv4 at the moment (though that should soon
   change), and is only safe to use as when used in one thread. Richer native
   networking libraries leveraging Haskell's strengths exist, and for new
   projects I'd recommend those. But for interfacing with existing protocols
