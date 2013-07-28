@@ -15,14 +15,14 @@ Description:
   .
   This library contains both bindings and a slightly cleaned up interface on
   top. The bindings are as close to the original as possible. Names are striped
-  of the leading "enet_" and converted to CamelCase, and the occasional newtype
+  of the leading 'enet_' and converted to CamelCase, and the occasional newtype
   is used instead, but otherwise all functions signatures are exactly the
-  same. The bindings are in "Network.ENet.Bindings".
+  same. The bindings are in 'Network.ENet.Bindings'.
   .
   The higher level interface is all other exposed modules. Functions like
-  "enet_host_*" are placed in "Network.ENet.Host". All functions are present
-  except for the "enet_socket*" functions: they are just wrappers of the Posix
-  Sockets Interface, which is already provided in Haskell by the "network"
+  'enet_host_*' are placed in 'Network.ENet.Host'. All functions are present
+  except for the 'enet_socket*' functions: they are just wrappers of the Posix
+  Sockets Interface, which is already provided in Haskell by the 'network'
   package. Changes are fairly minimal: "Out-Args" are now returned with a tuple,
   conversions between C and Haskell types happen automatically (when Haskell
   versions exists), and nullable pointer types have been replaced with
