@@ -16,10 +16,13 @@ create a c m i o  = withMaybeDo (fmap toENetAddress a) $ \a' -> B.hostCreate a' 
 destroy :: Ptr B.Host -> IO ()
 destroy = B.hostDestroy
 
-connect :: Ptr B.Host -> SockAddr -> CSize -> Word32 -> IO ()
+connect :: Ptr B.Host -> SockAddr -> CSize -> Word32 -> IO (Maybe (Ptr B.Peer))
 connect host address channelCount datum = alloca $ \addr -> do
   poke addr $ toENetAddress address
-  B.hostConnect host addr channelCount datum
+  peer <- B.hostConnect host addr channelCount datum
+  return $ if peer == nullPtr
+           then Nothing
+           else Just $ peer
 
 checkEvents :: Ptr B.Host -> IO (Maybe B.Event)
 checkEvents host = alloca $ \ptr -> do

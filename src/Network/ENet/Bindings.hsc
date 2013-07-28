@@ -246,7 +246,7 @@ foreign import ccall "enet.h enet_host_create"                    hostCreate
 foreign import ccall "enet.h enet_host_destroy"                   hostDestroy
   :: Ptr Host -> IO ()
 foreign import ccall "enet.h enet_host_connect"                   hostConnect
-  :: Ptr Host -> Ptr Address -> CSize -> Word32 -> IO ()
+  :: Ptr Host -> Ptr Address -> CSize -> Word32 -> IO (Ptr Peer)
 foreign import ccall "enet.h enet_host_check_events"              hostCheckEvents
   :: Ptr Host -> Ptr Event -> IO CUInt
 foreign import ccall "enet.h enet_host_service"                   hostService
