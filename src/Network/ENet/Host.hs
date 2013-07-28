@@ -20,7 +20,7 @@ connect :: Ptr B.Host -> SockAddr -> CSize -> Word32 -> IO (Ptr B.Peer)
 connect host address channelCount datum = alloca $ \addr -> do
   poke addr $ toENetAddress address
   throwErrnoIf
-    (/=nullPtr)
+    (==nullPtr)
     "could not connect to peer"
     $ B.hostConnect host addr channelCount datum
 
