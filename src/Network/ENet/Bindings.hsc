@@ -172,130 +172,130 @@ data RangeCoder
 
  -- Global functions
 
-foreign import ccall "enet.h enet_initialize"                initialize
+foreign import ccall unsafe "enet.h enet_initialize"                initialize
   :: IO CInt
-foreign import ccall "enet.h enet_initialize_with_callbacks" initializeWithCallbacks
+foreign import ccall unsafe "enet.h enet_initialize_with_callbacks" initializeWithCallbacks
   :: Version -> Ptr Callbacks -> IO CInt
-foreign import ccall "enet.h enet_deinitialize"              deinitialize
+foreign import ccall unsafe "enet.h enet_deinitialize"              deinitialize
   :: IO ()
-foreign import ccall "enet.h enet_linked_version"            linkedVersion
+foreign import ccall unsafe "enet.h enet_linked_version"            linkedVersion
   :: IO Version
 
-foreign import ccall "enet.h enet_time_get"                  timeGet
+foreign import ccall unsafe "enet.h enet_time_get"                  timeGet
   :: IO Word32
-foreign import ccall "enet.h enet_time_set"                  timeSet
+foreign import ccall unsafe "enet.h enet_time_set"                  timeSet
   :: Word32 -> IO ()
 
 
  -- Socket Functions
 
-foreign import ccall "enet.h enet_socket_create"      socketCreate
+foreign import ccall unsafe "enet.h enet_socket_create"      socketCreate
   :: CUInt -> IO Socket
-foreign import ccall "enet.h enet_socket_bind"        socketBind
+foreign import ccall unsafe "enet.h enet_socket_bind"        socketBind
   :: Socket -> Ptr Address -> IO CInt
-foreign import ccall "enet.h enet_socket_get_address" socketGetAddress
+foreign import ccall unsafe "enet.h enet_socket_get_address" socketGetAddress
   :: Socket -> Ptr Address -> IO CInt
-foreign import ccall "enet.h enet_socket_listen"      socketListen
+foreign import ccall unsafe "enet.h enet_socket_listen"      socketListen
   :: Socket -> CInt -> IO CInt
-foreign import ccall "enet.h enet_socket_accept"      socketAccept
+foreign import ccall unsafe "enet.h enet_socket_accept"      socketAccept
   :: Socket -> Ptr Address -> IO Socket
-foreign import ccall "enet.h enet_socket_connect"     socketConnect
+foreign import ccall unsafe "enet.h enet_socket_connect"     socketConnect
   :: Socket -> Ptr Address -> IO CInt
-foreign import ccall "enet.h enet_socket_send"        socketSend
+foreign import ccall unsafe "enet.h enet_socket_send"        socketSend
   :: Socket -> Ptr Address -> Ptr Buffer -> CSize -> IO CInt
-foreign import ccall "enet.h enet_socket_receive"     socketReceive
+foreign import ccall unsafe "enet.h enet_socket_receive"     socketReceive
   :: Socket -> Ptr Address -> Ptr Buffer -> CSize -> IO CInt
-foreign import ccall "enet.h enet_socket_wait"        socketWait
+foreign import ccall unsafe "enet.h enet_socket_wait"        socketWait
   :: Socket -> Ptr Word32 -> Ptr Word32 -> IO CInt
-foreign import ccall "enet.h enet_socket_set_option"  socketSetOption
+foreign import ccall unsafe "enet.h enet_socket_set_option"  socketSetOption
   :: Socket -> CUInt -> CInt -> IO CInt
-foreign import ccall "enet.h enet_socket_shutdown"    socketShutdown
+foreign import ccall unsafe "enet.h enet_socket_shutdown"    socketShutdown
   :: Socket -> CUInt -> IO CInt
-foreign import ccall "enet.h enet_socket_destroy"     socketDestroy
+foreign import ccall unsafe "enet.h enet_socket_destroy"     socketDestroy
   :: Socket -> IO ()
-foreign import ccall "enet.h enet_socketset_select"   socketSelectSet
+foreign import ccall unsafe "enet.h enet_socketset_select"   socketSelectSet
   :: Socket -> Ptr SocketSet -> Ptr SocketSet -> Word32 -> IO CInt
 
 
  -- Address Functions
 
-foreign import ccall "enet.h enet_address_set_host"    addressSetHost
+foreign import ccall unsafe "enet.h enet_address_set_host"    addressSetHost
   :: Ptr Address -> IO CString
-foreign import ccall "enet.h enet_address_get_host_ip" addressGetHostIP
+foreign import ccall unsafe "enet.h enet_address_get_host_ip" addressGetHostIP
   :: Ptr Address -> CString -> IO CSize
-foreign import ccall "enet.h enet_address_get_host"    addressGetHost
+foreign import ccall unsafe "enet.h enet_address_get_host"    addressGetHost
   :: Ptr Address -> CString -> IO CSize
 
 
  -- Packet Functions
 
-foreign import ccall "enet.h enet_packet_create"   packetCreate
+foreign import ccall unsafe "enet.h enet_packet_create"   packetCreate
   :: Ptr () -> CSize -> Word32 -> IO (Ptr Packet)
-foreign import ccall "enet.h enet_packet_destroy"  packetDestroy
+foreign import ccall unsafe "enet.h enet_packet_destroy"  packetDestroy
   :: Ptr Packet -> IO ()
-foreign import ccall "enet.h enet_packet_resize"   packetResize
+foreign import ccall unsafe "enet.h enet_packet_resize"   packetResize
   :: Ptr Packet -> CSize -> IO CInt
-foreign import ccall "enet.h enet_crc32"           crc32
+foreign import ccall unsafe "enet.h enet_crc32"           crc32
   :: Ptr Buffer -> CSize -> IO Word32
 
 
  -- Host Functions
 
-foreign import ccall "enet.h enet_host_create"                    hostCreate
+foreign import ccall unsafe "enet.h enet_host_create"                    hostCreate
   :: Ptr Address -> CSize -> CSize -> Word32 -> Word32 -> IO (Ptr Host)
-foreign import ccall "enet.h enet_host_destroy"                   hostDestroy
+foreign import ccall unsafe "enet.h enet_host_destroy"                   hostDestroy
   :: Ptr Host -> IO ()
-foreign import ccall "enet.h enet_host_connect"                   hostConnect
+foreign import ccall unsafe "enet.h enet_host_connect"                   hostConnect
   :: Ptr Host -> Ptr Address -> CSize -> Word32 -> IO (Ptr Peer)
-foreign import ccall "enet.h enet_host_check_events"              hostCheckEvents
+foreign import ccall unsafe "enet.h enet_host_check_events"              hostCheckEvents
   :: Ptr Host -> Ptr Event -> IO CUInt
-foreign import ccall "enet.h enet_host_service"                   hostService
+foreign import ccall unsafe "enet.h enet_host_service"                   hostService
   :: Ptr Host -> Ptr Event -> Word32 -> IO CUInt
-foreign import ccall "enet.h enet_host_flush"                     hostFlush
+foreign import ccall unsafe "enet.h enet_host_flush"                     hostFlush
   :: Ptr Host -> IO ()
-foreign import ccall "enet.h enet_host_broadcast"                 hostBroadcast
+foreign import ccall unsafe "enet.h enet_host_broadcast"                 hostBroadcast
   :: Ptr Host -> ChannelID -> Ptr Packet -> IO ()
-foreign import ccall "enet.h enet_host_compress"                  hostCompress
+foreign import ccall unsafe "enet.h enet_host_compress"                  hostCompress
   :: Ptr Host -> Ptr Compressor -> IO ()
-foreign import ccall "enet.h enet_host_compress_with_range_coder" hostCompressWithRangeCoder
+foreign import ccall unsafe "enet.h enet_host_compress_with_range_coder" hostCompressWithRangeCoder
   :: Ptr Host -> IO CUInt
-foreign import ccall "enet.h enet_host_channel_limit"             hostChannelLimit
+foreign import ccall unsafe "enet.h enet_host_channel_limit"             hostChannelLimit
   :: Ptr Host -> CSize -> IO ()
-foreign import ccall "enet.h enet_host_bandwidth_limit"           hostBandwidthLimit
+foreign import ccall unsafe "enet.h enet_host_bandwidth_limit"           hostBandwidthLimit
   :: Ptr Host -> Word32 -> Word32 -> IO ()
 
 
  -- Peer Functions
 
-foreign import ccall "enet.h enet_peer_send"               peerSend
+foreign import ccall unsafe "enet.h enet_peer_send"               peerSend
   :: Ptr Peer -> ChannelID -> Ptr Packet -> IO CInt
-foreign import ccall "enet.h enet_peer_receive"            peerReceive
+foreign import ccall unsafe "enet.h enet_peer_receive"            peerReceive
   :: Ptr Peer -> ChannelID -> IO (Ptr Packet)
-foreign import ccall "enet.h enet_peer_ping"               peerPing
+foreign import ccall unsafe "enet.h enet_peer_ping"               peerPing
   :: Ptr Peer -> IO ()
-foreign import ccall "enet.h enet_peer_ping_interval"      peerPingInterval
+foreign import ccall unsafe "enet.h enet_peer_ping_interval"      peerPingInterval
   :: Ptr Peer -> Word32 -> IO ()
-foreign import ccall "enet.h enet_peer_timeout"            peerTimeout
+foreign import ccall unsafe "enet.h enet_peer_timeout"            peerTimeout
   :: Ptr Peer -> Word32 -> Word32 -> Word32 -> IO ()
-foreign import ccall "enet.h enet_peer_reset"              peerReset
+foreign import ccall unsafe "enet.h enet_peer_reset"              peerReset
   :: Ptr Peer -> IO ()
-foreign import ccall "enet.h enet_peer_disconnect"         peerDisconnect
+foreign import ccall unsafe "enet.h enet_peer_disconnect"         peerDisconnect
   :: Ptr Peer -> Word32 -> IO ()
-foreign import ccall "enet.h enet_peer_disconnect_now"     peerDisconnectNow
+foreign import ccall unsafe "enet.h enet_peer_disconnect_now"     peerDisconnectNow
   :: Ptr Peer -> Word32 -> IO ()
-foreign import ccall "enet.h enet_peer_disconnect_later"   peerDisconnectLater
+foreign import ccall unsafe "enet.h enet_peer_disconnect_later"   peerDisconnectLater
   :: Ptr Peer -> Word32 -> IO ()
-foreign import ccall "enet.h enet_peer_throttle_configure" peerThrottleConfigure
+foreign import ccall unsafe "enet.h enet_peer_throttle_configure" peerThrottleConfigure
   :: Ptr Peer -> Word32 -> Word32 -> Word32 -> IO ()
 
 
  -- Range Coder Functions
 
-foreign import ccall "enet.h enet_range_coder_create"     rangeCoderCreate
+foreign import ccall unsafe "enet.h enet_range_coder_create"     rangeCoderCreate
   :: IO (Ptr  RangeCoder)
-foreign import ccall "enet.h enet_range_coder_destroy"    rangeCoderDestroy
+foreign import ccall unsafe "enet.h enet_range_coder_destroy"    rangeCoderDestroy
   :: Ptr RangeCoder -> IO ()
-foreign import ccall "enet.h enet_range_coder_compress"   rangeCoderCompress
+foreign import ccall unsafe "enet.h enet_range_coder_compress"   rangeCoderCompress
   :: Ptr RangeCoder -> Ptr Buffer -> CSize -> CSize -> Word8 -> CSize -> IO CSize
-foreign import ccall "enet.h enet_range_coder_decompress" rangeCoderDecompress
+foreign import ccall unsafe "enet.h enet_range_coder_decompress" rangeCoderDecompress
   :: Ptr RangeCoder -> Ptr Buffer -> CSize -> Word8 -> CSize -> IO CSize

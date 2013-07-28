@@ -34,10 +34,10 @@ Description:
   try to add Haddock documentation for everywhere it does not.
   .
   ENet currently only supports IPv4 at the moment (though that should soon
-  change), and is only safe to use as when used in one thread. Richer native
-  networking libraries leveraging Haskell's strengths exist, and for new
-  projects I'd recommend those. But for interfacing with existing protocols
-  using ENet, this package should be quite useful.
+  change), and must be called from only one bound thread (i.e. thread created
+  with 'forkOS'). Richer native networking libraries leveraging Haskell's
+  strengths exist, and for new projects I'd recommend those. But for interfacing
+  with existing protocols using ENet, this package should be quite useful.
 
 License-file:         enet/LICENSE
 License:              MIT
