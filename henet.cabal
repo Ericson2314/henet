@@ -1,5 +1,5 @@
 Name:                 henet
-Version:              1.3.9.1
+Version:              1.3.9.2
 Synopsis:             Bindings and high level interface for to ENet v1.3.9
 Description:
   ENet is a networking library on top of UDP. In it's own words:
@@ -45,10 +45,11 @@ Author:               John Ericson
 Maintainer:           Ericson2314@Yahoo.com
 Build-Type:           Simple
 Cabal-Version:        >=1.10
-Category:             FFI
+Category:             Network, FFI
 
 Extra-source-files:   enet/include/enet/*.h
 
+Bug-reports:          https://github.com/Ericson2314/henet/issues
 Source-repository head
   type:               git
   location:           git://github.com/Ericson2314/henet.git
