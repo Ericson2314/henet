@@ -49,6 +49,7 @@ data SocketOption = NonBlock
                   | ReuseAddress
                   | ReceiveTimeIs0
                   | SendTimeIs0
+                  | Error
                   deriving (Show, Eq)
 
 instance Enum SocketOption where
@@ -209,6 +210,8 @@ foreign import ccall unsafe "enet.h enet_socket_wait"        socketWait
   :: Socket -> Ptr Word32 -> Ptr Word32 -> IO CInt
 foreign import ccall unsafe "enet.h enet_socket_set_option"  socketSetOption
   :: Socket -> CUInt -> CInt -> IO CInt
+foreign import ccall unsafe "enet.h enet_socket_get_option"  socketGetOption
+  :: Socket -> CUInt -> Ptr CInt -> IO CInt
 foreign import ccall unsafe "enet.h enet_socket_shutdown"    socketShutdown
   :: Socket -> CUInt -> IO CInt
 foreign import ccall unsafe "enet.h enet_socket_destroy"     socketDestroy
