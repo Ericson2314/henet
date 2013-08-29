@@ -72,7 +72,7 @@ Library
 
 
   build-depends:      base            >= 3 && < 5
-    ,                 bitset          >= 1.4.0
+    ,                 bitset          >= 1.4.7
     ,                 network         >= 2.4.1
     ,                 bytestring      >= 0.10
     ,                 typesafe-endian == 0.1.*
