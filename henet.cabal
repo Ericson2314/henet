@@ -86,7 +86,6 @@ Library
   other-modules:      Network.ENet.Internal
     ,                 Network.ENet.Bindings.System
     ,                 Network.ENet.Bindings.Callbacks
---    ,                 Network.ENet.Bindings.Protocol
     ,                 Network.ENet.Bindings.List
 
   c-sources:          enet/callbacks.c
