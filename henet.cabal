@@ -1,5 +1,5 @@
 Name:                 henet
-Version:              1.3.9.2
+Version:              1.3.9.3
 Synopsis:             Bindings and high level interface for to ENet v1.3.9
 Description:
   ENet is a networking library on top of UDP. In it's own words:
